@@ -1,0 +1,318 @@
+/* Positions on Document */
+
+.p-relative {
+  position: relative !important;
+}
+
+.p-absolute {
+  position: absolute !important;
+}
+.p-fixed {
+  position: fixed !important;
+}
+.p-sticky {
+  position: sticky !important;
+}
+
+.t-0 {
+  top: 0px !important;
+}
+.r-0 {
+  right: 0px !important;
+}
+.b-0 {
+  bottom: 0px !important;
+}
+.l-0 {
+  left: 0px !important;
+}
+
+/* Margin Auto */
+
+.mt-auto, .m-auto, .my-auto{
+  margin-top: auto;
+}
+.mb-auto, .m-auto, .my-auto{
+  margin-bottom: auto;
+}
+.ml-auto, .m-auto, .mx-auto{
+  margin-left: auto;
+}
+.mr-auto, .m-auto, .mx-auto{
+  margin-right: auto;
+}
+
+/* Padding Auto */
+
+.pt-auto, .p-auto, .py-auto{
+  padding-top: auto;
+}
+.pb-auto, .p-auto, .py-auto{
+  padding-bottom: auto;
+}
+.pl-auto, .p-auto, .px-auto{
+  padding-left: auto;
+}
+.pr-auto, .p-auto, .px-auto{
+  padding-right: auto;
+}
+
+/* Margin Zero */
+
+.m-0,
+.mt-0,
+.my-0 {
+  margin-top: 0 !important;
+}
+
+.m-0,
+.mb-0,
+.my-0 {
+  margin-bottom: 0 !important;
+}
+
+.m-0,
+.mr-0,
+.mx-0 {
+  margin-right: 0 !important;
+}
+
+.m-0,
+.ml-0,
+.mx-0 {
+  margin-left: 0 !important;
+}
+
+/* Margin One */
+
+.m-1,
+.mt-1,
+.my-1 {
+  margin-top: 0.25rem !important;
+}
+
+.m-1,
+.mb-1,
+.my-1 {
+  margin-bottom: 0.25rem !important;
+}
+
+.m-1,
+.ml-1,
+.mx-1 {
+  margin-left: 0.25rem !important;
+}
+
+.m-1,
+.mr-1,
+.mx-1 {
+  margin-right: 0.25rem !important;
+}
+
+/* Margin Two */
+
+.m-2,
+.mt-2,
+.my-2 {
+  margin-top: 0.5rem !important;
+}
+
+.m-2,
+.mb-2,
+.my-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.m-2,
+.ml-2,
+.mx-2 {
+  margin-left: 0.5rem !important;
+}
+
+.m-2,
+.mr-2,
+.mx-2 {
+  margin-right: 0.5rem !important;
+}
+
+/* Margin Three */
+
+.m-3,
+.mt-3,
+.my-3 {
+  margin-top: 1rem !important;
+}
+
+.m-3,
+.mb-3,
+.my-3 {
+  margin-bottom: 1rem !important;
+}
+
+.m-3,
+.ml-3,
+.mx-3 {
+  margin-left: 1rem !important;
+}
+
+.m-3,
+.mr-3,
+.mx-3 {
+  margin-right: 1rem !important;
+}
+
+/* Margin Four */
+
+.m-4,
+.mt-4,
+.my-4 {
+  margin-top: 1.5rem !important;
+}
+
+.m-4,
+.mb-4,
+.my-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+.m-4,
+.ml-4,
+.mx-4 {
+  margin-left: 1.5rem !important;
+}
+
+.m-4,
+.mr-4,
+.mx-4 {
+  margin-right: 1.5rem !important;
+}
+
+/* Padding Zero */
+
+.p-0,
+.pt-0,
+.py-0 {
+  padding-top: 0 !important;
+}
+
+.p-0,
+.pb-0,
+.py-0 {
+  padding-bottom: 0 !important;
+}
+
+.p-0,
+.pr-0,
+.px-0 {
+  padding-right: 0 !important;
+}
+
+.p-0,
+.pl-0,
+.px-0 {
+  padding-left: 0 !important;
+}
+
+/* Padding One */
+
+.p-1,
+.pt-1,
+.py-1 {
+  padding-top: 0.25rem !important;
+}
+
+.p-1,
+.pb-1,
+.py-1 {
+  padding-bottom: 0.25rem !important;
+}
+
+.p-1,
+.pl-1,
+.px-1 {
+  padding-left: 0.25rem !important;
+}
+
+.p-1,
+.pr-1,
+.px-1 {
+  padding-right: 0.25rem !important;
+}
+
+/* Padding Two */
+
+.p-2,
+.pt-2,
+.py-2 {
+  padding-top: 0.5rem !important;
+}
+
+.p-2,
+.pb-2,
+.py-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+.p-2,
+.pl-2,
+.px-2 {
+  padding-left: 0.5rem !important;
+}
+
+.p-2,
+.pr-2,
+.px-2 {
+  padding-right: 0.5rem !important;
+}
+
+/* Padding Three */
+
+.p-3,
+.pt-3,
+.py-3 {
+  padding-top: 1rem !important;
+}
+
+.p-3,
+.pb-3,
+.py-3 {
+  padding-bottom: 1rem !important;
+}
+
+.p-3,
+.pl-3,
+.px-3 {
+  padding-left: 1rem !important;
+}
+
+.p-3,
+.pr-3,
+.px-3 {
+  padding-right: 1rem !important;
+}
+
+/* Padding Four */
+
+.p-4,
+.pt-4,
+.py-4 {
+  padding-top: 1.5rem !important;
+}
+
+.p-4,
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem !important;
+}
+
+.p-4,
+.pl-4,
+.px-4 {
+  padding-left: 1.5rem !important;
+}
+
+.p-4,
+.pr-4,
+.px-4 {
+  padding-right: 1.5rem !important;
+}

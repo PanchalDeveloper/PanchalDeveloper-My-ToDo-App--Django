@@ -1,0 +1,312 @@
+{% load tz %}
+{% load static %}
+{% get_current_timezone as TIME_ZONE %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon IMGs -->
+    <link
+      rel="shortcut icon"
+      href="/static/assets/images/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      sizes="64x64"
+      href="/static/assets/images/favicon-64x64.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      sizes="16x16"
+      href="/static/assets/images/favicon-16x16.png"
+      type="image/x-icon"
+      />
+      
+      <!-- Font Icon CDN Style Sheets -->
+        <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet" />
+
+    <!-- Local Style Sheets -->
+    <link rel="stylesheet" href="/static/assets/css/utility.css" />
+    <link rel="stylesheet" href="/static/assets/css/sapcingStyle.css" />
+    <link rel="stylesheet" href="/static/assets/css/style.css" />
+    <link rel="stylesheet" href="/static/assets/css/mediaAndQuerys.css" />
+    <link rel="stylesheet" href="/static/assets/css/todoListStyle.css" />
+    <script src="/static/assets/js/loadNetworkFiles.js"></script>
+    <title> {% block title %}{% endblock title %} </title>
+  </head>
+  <body>
+    <div id="webBackground"></div>
+    <div id="skipNavigation" class="skipNavigation flex">
+      <a href="#section_1">Skip To Main Content</a>
+    </div>
+    <header id="navHeader" class="p-sticky">
+      <div class="container_fluid">
+        <nav
+          id="navbar"
+          class="navbar navbar-expand-lg px-3 flex flex-SB"
+        >
+          <div class="container nav-left flex flex-SB p-center">
+            <a class="navbar-brand flex p-center ml-2" href="/"
+            ><img
+              src="/static/assets/images/logo_main.png"
+              alt="Logo"
+              title="Logo Main"
+              class="logo-main my-1"
+          /></a>
+          </div>
+        <div class="container nav-right flex j-end a-center">
+          <button
+          id="navbarToggler"
+          class="navbar-toggler bg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          onclick=" changeClasses('navMenuBtn', 'lni-menu', 'lni-close'), changeClasses('navbarMenuList', 'show', 'hidden')"
+        >
+        <i id="navMenuBtn" class="lni lni-menu"></i>
+        </button>
+          <div id="navbarMenuList" class="collapse navbar-collapse hidden" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-list flex flex-SB">
+              <li class="nav-item flex j-center my-0">
+                <ul
+                  class="navbar-nav nav-list-left"
+                  title="Main Navigation Bar."
+                >
+                  <li class="nav-item flex j-center" title="Go to Home Page.">
+                    <a class="nav-link btn f-big-2 f-small-1" aria-current="page" href="/"
+                      >Home</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li
+                class="nav-item flex j-center flex my-0"
+                title="Go to Log-in Page."
+              >
+                <ul class="navbar-nav nav-list-right mr-auto">
+                  {% if user.is_anonymous %}
+                  <li class="nav-item flex j-center">
+                    <a
+                      class="nav-link btn f-big-2 f-small-1"
+                      aria-current="page"
+                      href="/login"
+                      >Log In</a
+                    >
+                  </li>
+                  <li
+                    class="nav-item flex j-center"
+                    title="Go to Sigh-up Page."
+                  >
+                    <a
+                      class="nav-link btn f-big-2 f-small-1"
+                      aria-current="page"
+                      href="/signup"
+                      >Sign Up</a
+                    >
+                  </li>
+
+                  {% else %}
+                  <li
+                    id="userArea"
+                    class="nav-item flex j-center usr p-relative"
+                    title="User Area"
+                  >
+                    <a
+                      class="nav-link btn f-big-2 usr-link r-alert f-small-1"
+                      aria-current="page"
+                      href="#user-area"
+                      title="Greatings to User."
+                    >
+                      Hello {{ user.first_name }} !
+                    </a>
+
+                    <ul class="inUl navbar-nav">
+                      <span class="tri-angle no-usr-select"></span>
+                      <li
+                        class="nav-item flex j-center"
+                        title="Go To Change Password Page."
+                      >
+                        <a href="/#todo-section" class="nav-link btn f-big-2"
+                          >My To-Dos</a
+                        >
+                      </li>
+                      <li
+                        class="nav-item flex j-center"
+                        title="Go To Change Password Page."
+                      >
+                        <a href="/change-password" class="nav-link btn f-big-2"
+                          >Change Password</a
+                        >
+                      </li>
+                      <li
+                        class="nav-item flex j-center"
+                        title="Delete This Account Permanently."
+                      >
+                        <a
+                        id="delAccount"
+                        href="#delete-my-account"
+                        class="nav-link confirmation btn show-pop-up-btn f-big-2 r-alert"
+                        onclick="event.preventDefault(), showConfirmDialog(action='/delete-account', 'This will Delete Your Account & all it\'s data Permanently', 'Wanna Proceed it Anyway !?', 'true', 'Delete')"
+                        >Delete My Account</a>
+                      </li>
+                    </ul>
+                  
+                    <li
+                    id="trashBinArea"
+                    class="nav-item flex j-center"
+                    title="Trash Bin Area."
+                  >
+                    <a href="#trash-bin-area" class="nav-link btn f-big-2">Trash Bin</a>
+                    <ul class="inUl navbar-nav">
+                      <span class="tri-angle no-usr-select"></span>
+                      <li
+                    class="nav-item flex j-center"
+                    title="Go To Trash Bin Page."
+                  >
+                    <a href="/trash-bin" class="nav-link btn f-big-2">GoTo Trash Bin</a>
+                    </li>
+                      <li
+                    class="nav-item flex j-center"
+                    title="Clear Trash Bin."
+                        >
+                    <a
+                      id="clrTrashBin"
+                      href="#clearTrashBin"
+                      class="nav-link confirmation btn show-pop-up-btn f-big-2 r-alert"
+                      onclick="event.preventDefault(), showConfirmDialog(action='/clear-trash-bin', 'This will clear Trash Bin Permanently', 'Wanna proceed anyway !?')"
+                      >Clear Trash Bin</a>
+                  </li>
+                    </ul>
+                  </li>
+                  </li>
+                  <li class="nav-item flex j-center" title="Log-Out Now">
+                    <a
+                      class="nav-link btn f-big-2 f-small-1"
+                      aria-current="page"
+                      href="/logout"
+                      >Log-Out</a
+                    >
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        </nav>
+      </div>
+    </header>
+    <main class="mt-2">
+      {% if messages %} {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissable pop-up fade show ab-in-cent text-center py-2"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="alertCloseBtn btn hide-pop-up-btn btn-close bg-none no-outln br-0 p-1"
+          data-bs-dismiss="alert"
+          aria-label="CloseAlert"
+        ><i class="lni lni-close"></i></button>
+      </div>
+      {% endfor %} {% endif %} {% block mainContent %} {% endblock mainContent %}
+    </main>
+    <div
+      class="gotoTop flex a-center j-end w-100 p-4"
+      id="gotoTop"
+      onclick="winScroll()"
+      style="visibility: hidden;"
+    >
+      <span id="gotoTopBtn"
+      onscroll="checkWinScoll(this, 630)"
+        class="gotoTopBtn lni lni-chevron-up p-box boxBig"
+      ></span>
+    </div>
+    <footer
+      class="footer flex flex-SB flex-wrap flex-even-1 p-3"
+      id="appFooter"
+    >
+    <div class="container">
+      <div class="footerUsrArea flex flex-wrap flex-even-0">
+        <div class="footerLeft flex a-center lh-small">
+          <div class="footerSocial no-wrap" id="footerSocial">
+            <a href="http://www.facebook.com/PanchalDevloper" target="_blank" class=" m-2 p-2"><span class="lni lni-facebook-filled"></span></a>
+            <a href="http://twitter.com/PanchalDevloper" target="_blank" class=" m-2 p-2"><span class="lni lni-twitter-original"></span></a>
+            <a href="https://www.linkedin.com/in/panchal-devloper/" target="_blank" class=" m-2 p-2"><span class="lni lni-linkedin-original"></span></a>
+            <a href="https://stackoverflow.com/u/20530552" target="_blank" class=" m-2 p-2"><span class="lni lni-stackoverflow"></span></a>
+          </div>
+        </div>
+        <div class="footerRight flex a-center lh-small text-right f-italic">
+          <div class="userTime f-small-3 w-100" id="footerUserTime">{% if not user.is_anonymous %}Last Login :-{{ user.last_login }}{% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="TimeZoneArea flex a-center j-end no-wrap lh-small">
+        <form action="/" id="timeZoneForm" method="POST">
+          {% csrf_token %}
+          <div class="form-group flex-row">
+            <label for="currTimeZone" class="bg-none">Location :</label>
+            <select name="currTimeZone" id="currTimeZone">
+              {% if timezones %}
+              {% for city, tz in timezones.items %}
+              <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ city }}</option>
+              {% endfor %}
+              {% else %}
+              <option value="Asia/Kolkata" selected>India</option>
+              {% endif %}
+            </select>
+            <input type="text" name="timeZoneChanged" id="timeZoneChanged" value="False" hidden aria-hidden="true">
+          </div>
+      </form>
+      </div>
+      <div class="copyrightArea flex j-center w-100 f-italic" id="footerCopyright">
+          &copy 2022 Copyright: Panchal Devloper | All Rights Reserved
+      </div>
+    </div>
+    </footer>
+    <dialog id="confirmationPopUp" class="popUpmodal pop-up">
+      <button
+        type="button"
+        class="closeDialogBtn btn hide-pop-up-btn btn-close bg-none no-shadow no-outln f-small-1 m-1"
+      >
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+      <form action="/" method="POST" id="confirmationPopUpForm" class="dialogForm py-3 px-4">
+        {% csrf_token %}
+        <div class="pop-up-data flex j-center no-wrap flex-column mt-3">
+        <h5 id="popUpHeadMsgTxt" class="text-center mt-2"></h5>
+        <p id="popUpBodyMsgTxt" class="text-center mt-2 f-big-1"></p>
+        <div id="popUpConfirmPassArea" class="form-group">
+          <label for="popUpConfirmPass"><i class="required_input"></i>Verify Yourself</label>
+          <input
+            type="password" autocomplete="current-password"
+            class="form-control"
+            id="popUpConfirmPass"
+            name="popUpConfirmPass"
+            placeholder="Enter Password"
+          />
+        </div>
+        <div class="form-group flex-row">
+          <button type="submit" id="popUpMsgProceedBtn" class="btn m-3">Proceed</button>
+          <button type="button" id="popUpMsgCancelBtn" class="btn hide-pop-up-btn m-3">Cancel</button>
+        </div>
+        </div>
+      </form>
+    </dialog>
+    <script src="/static/assets/js/functions.js"></script>
+    <script src="/static/assets/js/script.js"></script>
+    <script src="/static/assets/js/minMaxDate.js"></script>
+    <script src="/static/assets/js/search.js"></script>
+  </body>
+</html>

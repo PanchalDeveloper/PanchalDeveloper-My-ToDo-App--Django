@@ -1,0 +1,205 @@
+{% extends 'app/base.html' %}
+{% block title %}Trash Bin - My To Do{% endblock title %}
+{% block mainContent %}
+
+      <section id="section_1">
+        <h1 class="my-4" title="Added Todos Section">Trash Bin</h1>
+        <div class="container todoListContainer">
+          {% if todos|length <= 0 %}
+          <div class="empty-alert alert-secondary w-100 text-center py-4" role="alert">
+            Trash Bin is Empty.
+          </div>
+          {% else %}
+          <div class="container filterArea flex flex-SB flex-wrap a-center p-relative">
+            <div class="filterMenu flex flex-wrap j-center w-50">
+              <button
+                type="button"
+                id="filterTodoBtn"
+                class="filterBtn openDialogBtn btn show-pop-up-btn fsvBtn f-small-1  m-2 px-3"
+                title="Filter Todos."
+                onclick="showDialog('filterPopUp')"
+              >Filter
+              <i class="fa-solid fa-filter"></i>
+              </button>
+              <button
+                type="button"
+                id="sortTodoBtn"
+                class="sortBtn fsvBtn btn f-small-1 m-2 px-3"
+                title="Sort Todos in Ascending/Descending order."
+                onclick="sortElems(false)"
+              >Sort
+                <i id="todoSortBtn" class="sortIcon fa-solid fa-arrow-down-1-9 mx-1"> </i>
+              </button>
+              <button
+                type="button"
+                id="changeViewTodoBtn"
+                class="changeViewBtn fsvBtn btn f-small-1 m-2 px-3"
+                title="Change View of Todo."
+                onclick="changeTodoView(false), changeClasses('todoChangeView', 'lni-page-break', 'lni-layout')"
+              >View
+              <i id="todoChangeView" class="lni lni-page-break f-small-1 "></i>
+                </i>
+              </button>
+              
+              <dialog id="filterPopUp" class="popUpmodal">
+                <button
+                  type="button"
+                  id="closeDialogBtn1"
+                  class="closeDialogBtn bg-none no-shadow btn f-small-1 m-1"
+                  onclick="hideDialog('filterPopUp')"
+                >
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+                <form method="dialog" class="dialogForm py-3 px-4">
+                  <h2 class="text-center">Filter Todos</h2>
+                  <div class="filterByDate container flex j-center no-wrap flex-column mt-3">
+                    <h4>Filter by Date</h4>
+                    <div class="form-group">
+                      <label class="f-small-1" for="minDateBox">From</label>
+                      <input
+                        type="date"
+                        name="minDateBox"
+                        id="minDateBox"
+                        class="sortingByDate p-2"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="f-small-1" for="maxDateBox">To</label
+                      ><input
+                        type="date"
+                        name="maxDateBox"
+                        id="maxDateBox"
+                        class="sortingByDate p-2"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <span class="btnsContainer flex a-center j-center">
+                        <button
+                          type="button"
+                          name="sortingByDateBtn"
+                          id="filterByDateBtn"
+                          class="btn btn-secondary p-box boxBig filterByDate"
+                          title="Filter Todos."
+                          onclick="FilterData()"
+                        >
+                          <i class="fa-solid fa-filter"></i>
+                        </button>
+                        <button
+                          type="button"
+                          name="clearSortingByDateBtn"
+                          id="clearSortingByDateBtn"
+                          class="btn btn-secondary p-box boxBig clearSortingByDateBtn"
+                          title="Clear Filter."
+                          onclick="clearDataFilter(), hideDialog('filterPopUp')"
+                        >
+                          <i class="fa-solid fa-xmark"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+                <div class="darkBack p-absolute vw-100 vh-100"></div>
+              </dialog>
+            </div>
+            <form class="form-inline flex flex-right my-2">
+              <input
+                class="form-control mr-sm-2"
+                id="searchBoxMain"
+                type="search"
+                title="Search Todos."
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </form>
+          </div>
+          <div class="container flex flex-SB">
+            <div class="changePages flex flex-SA flex-wrap">
+              <div class="pageSelectTitle flex a-center h4 m-2" title="Go To Page">
+                Page :-
+              </div>
+              <div
+                class="pageSelectionArea flex j-end a-center f-big-2"
+                id="pageSelectionArea1"
+                data-todo-count="{{ todos|length }}"
+              ></div>
+            </div>
+          </div>
+          <div id="todoList" class="container todoList p-3">
+            {% for todo in todos %}
+            <div id="todo_{{ forloop.counter }}"
+            class="todoBody" data-created-date="{{ todo.todoTime|date:"Y-m-d" }}"
+            data-srch-match="true" data-between-dates="true" >
+            <div
+              id="todoCellIndex_{{ forloop.counter }}"
+              class="todoSno todoCell f-small-1"
+              title="Todo Serial No."
+            >
+              <span>{{ forloop.counter }}.
+            </div>
+            <div
+              id="todoCellTitle_{{ forloop.counter }}"
+              class="todoTitle todoCell searchable f-big-1"
+              title="Todo Title."
+            > 
+              {{todo.title}}
+            </div>
+            <div
+              id="todoCellDesc_{{ forloop.counter }}"
+              class="todoDesc searchable todoCell f-small-1"
+              title="Todo Body Text."
+            >
+              {{ todo.description }}
+            </div>
+            <div
+            id="todoCellBtns_{{ forloop.counter }}"
+              class="todoEditBtns todoCell"
+              style="text-align: right"
+              title="Make Changes in Todos."
+            >
+            <a
+                href=" {% url 'restoreTodo' todo_id=todo.id %}"
+                class="restoreTodo todoEditBtn btn btn-outline-dark m-2 p-box boxBig"
+                title="Restore Todo"
+              >
+                <i class="lni lni-spinner-arrow"></i>
+              </a>
+              <a
+                href="{% url 'delTrashTodo' todo_id=todo.id %}"
+                class="deleteTodo todoEditBtn btn btn-outline-dark m-2 p-box boxBig"
+                title="Delete Todo Permanently"
+              >
+              <i class="fa-solid fa-trash"></i>
+              </a>
+            
+          </div>
+          <div
+            id="todoCellDateTime_{{ forloop.counter }}"
+            class="todoTime todoCell f-small-3"
+            title="Todo Created Timing."
+          >
+          {{ todo.todoTime|date:"D d M Y , h:i:s A" }}</span>
+          </div>
+          </div>
+          {% endfor %}
+          <div id="todoBody" class="todoBody todoEmpty a-center flex-SA">
+            <div colspan="5" class="noTodo todoCell vert-mid text-center">
+              <i>Todos Not Found ! </i>
+            </div>
+          </div>
+        </div>
+        <div class="container flex j-end">
+          <div class="changePages flex flex-SA flex-wrap">
+            <div class="pageSelectTitle flex a-center h4 m-2" title="Go To Page">
+              Page :-
+            </div>
+            <div
+              class="pageSelectionArea flex j-end a-center f-big-2"
+              id="pageSelectionArea2"
+              data-todo-count="{{ todos|length }}"
+            ></div>
+          </div>
+        </div>
+          {% endif %}
+      </section>
+
+{% endblock mainContent %}

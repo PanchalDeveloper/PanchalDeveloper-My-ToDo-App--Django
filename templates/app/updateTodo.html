@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %} {% block title %}Update - My To Do{% endblock title %}
+{% block mainContent %}
+
+<section id="section_1" aria-labelledby="todo-update-section">
+  <h1 class="my-4">Update ToDo</h1>
+  <div class="container">
+    <form action="/update-todo/{{todo.id}}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="title"><i class="required_input"></i>Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          placeholder="Enter Title"
+          value="{{ todo.title }}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="desc"><i class="required_input"></i>Description</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="desc"
+          name="desc"
+          placeholder="Enter Description"
+          spellcheck="true"
+        >{{ todo.description }}</textarea>
+      </div>
+      <div class="form-group my-3">
+        <button type="submit" class="btn m-4">Update</button>
+        <button type="button" class="btn m-4" onclick="window.location.href='/'" >Cancle</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock mainContent %}
