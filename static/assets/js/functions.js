@@ -25,7 +25,7 @@ if (alertMsgs.length > 0) {
 
 // Remove alerts after some time automatically
 function remAlertMsgs() {
-    let hideTime = 3000;
+    let hideTime = 93000;
     alertMsgs.forEach(alertMsg => {
         if (alertMsg.style.display != "none") {
             removeStep1 = window.setTimeout(() => { alertMsg.style.opacity = "0"; }, hideTime);
@@ -328,15 +328,25 @@ function winScroll(x = 0, y = 0) {
 }
 
 // Hide Element when Window Y-axis scroll is greater than given value
-function checkWinScoll(elem, val) {
-    if (window.scrollY > val) {
+function checkWinScoll(elem, val, disAs='block') {
+    if (window.scrollY > val && elem.style.visibility == "hidden") {
+        elem.style.display = disAs;
         elem.style.visibility = "visible";
         elem.style.opacity = "1";
     }
-    if (window.scrollY <= val) {
+    if (window.scrollY <= val && elem.style.visibility != "hidden") {
         elem.style.visibility = "hidden";
         elem.style.opacity = "0";
+
+        // let hideMe = setTimeout(()=>{
+            elem.style.display = 'hidden';
+        // }, 0);
     }
+}
+// Hide Element when Clicked
+function hideOnClick(event) {
+    event.target.style.display = 'none';
+    console.log(event.target);
 }
 
 // Replace Classes with Given Classes

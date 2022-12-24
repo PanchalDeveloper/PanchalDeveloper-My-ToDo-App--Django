@@ -12,8 +12,6 @@
   --head-foot-theme-color: #000b24;
   --app-font-big-1: 1.2rem;
   --app-font-big-2: 1.4rem;
-  --app-font-big-3: 1.6rem;
-  --app-font-big-4: 2rem;
   --app-font-small-1: 1rem;
   --app-font-small-2: 0.9rem;
   --app-font-small-3: 0.75rem;
@@ -27,6 +25,7 @@
   --app-footer-font-family: "Inter", sans-serif;
   --def-border-radius: 2em;
   --min-border-radius: 10px;
+  --min-border-radius-1: 2px;
   --main-shadow-color: #fff7;
   --scrollbar-track-color: rgba(0 0 0 / 0.35);
   --scrollbar-thumb-color: rgba(70 70 70 /0.9);
@@ -101,9 +100,8 @@
   outline: solid var(--main-app-secondary-color);
 }
 .container {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 75%;
+  margin-inline: auto;
 }
 
 .container_fluid {
@@ -186,12 +184,12 @@
   user-select: none;
   min-width: 15vw;
   max-width: 90vw;
-  position: absolute;
+  position: fixed;
   line-height: var(--main-line-height-3);
-  top: 0;
+  top: 15vh;
   left: 50%;
-  padding-left: 20px;
-  padding-right: 50px;
+  padding-block: 1rem;
+  padding-inline: 20px 50px;
   transition: opacity 0.75s ease-in-out;
   z-index: 200;
 
@@ -200,6 +198,8 @@
   -webkit-transform: translateX(-50%);
 }
 .alert > .alertCloseBtn {
+  width: fit-content;
+  height: fit-content;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -212,19 +212,13 @@
 .btn {
   user-select: none;
   white-space: nowrap;
-  transition: scale var(--trans-delay-time-quick) ease-in;
-  -webkit-transition: scale var(--trans-delay-time-quick) ease-in;
-  -moz-transition: scale var(--trans-delay-time-quick) ease-in;
-  -o-transition: scale var(--trans-delay-time-quick) ease-in;
+  flex-shrink: 0;
 }
 .btn:where(:hover, :focus):not(.nav-link) {
   scale: 1.08;
   opacity: 0.75;
 }
-.nav-link.btn:where(:hover, :focus) {
-  scale: 1.02;
-}
-.btn:active {
+.btn:where( :active, :hover, :focus) {
   scale: 0.98;
 }
 
@@ -262,22 +256,23 @@ button {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-block: 2.5rem;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
+  justify-self: center;
   align-items: center;
   font-weight: 500;
   font-family: var(--app-font-family-1);
 }
 
-.form-group:has(:first-child:where(button, small)) {
+.form-group.btns-area {
   flex-direction: row;
 }
 
 .form-group > * {
-  max-width: 95%;
-  margin: 0.25em 0.5em 0px;
+  margin: 0.25em 0.5em;
   background-color: var(--main-app-theme-color);
 }
 
@@ -296,12 +291,28 @@ button {
   font-size: var(--app-font-small-1);
 }
 
+.form-group > :where(input:where([type="text"],[type="password"],[type="date"]), textarea) + label{
+    width: max-content;
+    height: max-content;
+    position: absolute;
+    padding: 0 0 0 1rem;
+    inset: 0;
+    transform: translate(0, -120%);
+    -webkit-transform: translate(0, -120%);
+    -moz-transform: translate(0, -120%);
+    -o-transform: translate(0, -120%);
+}
+
 .form-control {
   display: block;
   width: 100%;
   line-height: var(--main-line-height-2);
 }
 
+.slct-optn{
+    padding: 0.35rem;
+    border-radius: var(--min-border-radius);
+}
 .show {
   opacity: 1;
   visibility: visible;
@@ -377,37 +388,136 @@ button {
   scale: 75%;
 }
 
-.f-small-1 {
-  font-size: var(--app-font-small-1) !important;
-  font-weight: 500 !important;
-}
+/* Font Sizes */
 
+.f-small-0 {
+  font-size: 1rem !important;
+}
+.f-small-1 {
+  font-size: 0.9rem !important;
+}
 .f-small-2 {
-  font-size: var(--app-font-small-2) !important;
-  font-weight: 500 !important;
+  font-size: 0.8rem !important;
 }
 .f-small-3 {
-  font-size: var(--app-font-small-3) !important;
-  font-weight: 500 !important;
+  font-size: 0.7rem !important;
 }
-
+.f-small-4 {
+  font-size: 0.6rem !important;
+}
+.f-big-0 {
+  font-size: 1rem !important;
+}
 .f-big-1 {
-  font-size: var(--app-font-small-1) !important;
-  font-weight: 700 !important;
+  font-size: 1.35rem !important;
 }
-
 .f-big-2 {
-  font-size: var(--app-font-big-2);
-  font-weight: 700 !important;
+  font-size: 1.65rem !important;
 }
 .f-big-3 {
-  font-size: var(--app-font-big-3);
-  font-weight: 700 !important;
+  font-size: 1.85rem !important;
 }
 .f-big-4 {
-  font-size: var(--app-font-big-4);
-  font-weight: 900 !important;
+  font-size: 2rem !important;
 }
+.f-big-5 {
+  font-size: 3.5rem !important;
+}
+.f-big-6 {
+  font-size: 6rem !important;
+}
+
+@supports (font-size: clamp(16px, 1.15vw, 1rem)) {
+  /* Font Sizes */
+
+  .f-small-0 {
+    font-size: clamp(14px, 1.15vw, 1rem) !important;
+  }
+  .f-small-1 {
+    font-size: clamp(14px, 1vw, 0.9rem) !important;
+  }
+  .f-small-2 {
+    font-size: clamp(13px, 0.9vw, 0.8rem) !important;
+  }
+  .f-small-3 {
+    font-size: clamp(13px, 0.8vw, 0.7rem) !important;
+  }
+  .f-small-4 {
+    font-size: clamp(11px, 0.7vw, 0.6rem) !important;
+  }
+  .f-big-0 {
+    font-size: clamp(14px, 1.25vw, 1rem) !important;
+  }
+  .f-big-1 {
+    font-size: clamp(16px, 1.5vw, 1.35rem) !important;
+  }
+  .f-big-2 {
+    font-size: clamp(18px, 1.75vw, 1.65rem) !important;
+  }
+  .f-big-3 {
+    font-size: clamp(20px, 2vw, 1.85rem) !important;
+  }
+  .f-big-4 {
+    font-size: clamp(24px, 2.5vw, 2rem) !important;
+  }
+  .f-big-5 {
+    font-size: clamp(28px, 2.75vw, 3.5rem) !important;
+  }
+  .f-big-6 {
+    font-size: clamp(32px, 3vw, 6rem) !important;
+  }
+}
+
+/* Line Height */
+
+.lh-small-1 {
+  line-height: 1rem !important;
+}
+.lh-small-2 {
+  line-height: 0.75rem !important;
+}
+.lh-small-3 {
+  line-height: 0.5rem !important;
+}
+.lh-big-1 {
+  line-height: 1.25rem !important;
+}
+.lh-big-2 {
+  line-height: 1.5rem !important;
+}
+.lh-big-3 {
+  line-height: 1.75rem !important;
+}
+.lh-big-4 {
+  line-height: 2rem !important;
+}
+.lh-big-5 {
+  line-height: 4rem !important;
+}
+.lh-big-6 {
+  line-height: 6rem !important;
+}
+/* Font Weights */
+
+.f-weight-0 {
+  font-weight: 300 !important;
+}
+.f-weight-1 {
+  font-weight: 400 !important;
+}
+.f-weight-2 {
+  font-weight: 500 !important;
+}
+.f-weight-3 {
+  font-weight: 600 !important;
+}
+.f-weight-4 {
+  font-weight: 800 !important;
+}
+.f-weight-5 {
+  font-weight: bolder !important;
+}
+
 
 .br-0 {
   border-radius: 0px;

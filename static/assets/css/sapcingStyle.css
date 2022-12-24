@@ -27,36 +27,6 @@
   left: 0px !important;
 }
 
-/* Margin Auto */
-
-.mt-auto, .m-auto, .my-auto{
-  margin-top: auto;
-}
-.mb-auto, .m-auto, .my-auto{
-  margin-bottom: auto;
-}
-.ml-auto, .m-auto, .mx-auto{
-  margin-left: auto;
-}
-.mr-auto, .m-auto, .mx-auto{
-  margin-right: auto;
-}
-
-/* Padding Auto */
-
-.pt-auto, .p-auto, .py-auto{
-  padding-top: auto;
-}
-.pb-auto, .p-auto, .py-auto{
-  padding-bottom: auto;
-}
-.pl-auto, .p-auto, .px-auto{
-  padding-left: auto;
-}
-.pr-auto, .p-auto, .px-auto{
-  padding-right: auto;
-}
-
 /* Margin Zero */
 
 .m-0,

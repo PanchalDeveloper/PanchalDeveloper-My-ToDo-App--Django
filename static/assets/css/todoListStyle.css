@@ -15,6 +15,21 @@
   overflow-x: auto;
 }
 
+@supports(grid-template-rows: masonry){
+.todoList {
+  display: grid;
+   align-items: flex-start;
+   flex-flow: row wrap;
+   grid-template-columns: repeat(3, 1fr);
+   grid-template-rows: masonry;
+  align-tracks: stretch;
+}
+.todoList > * {
+  break-inside: avoid;
+  margin-bottom: 0.75em;
+}
+}
+
 .todoBody {
   min-width: 280px;
   min-height: 280px;
@@ -26,7 +41,7 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
-  text-align: justify;
+  text-align: center;
   border-radius: 12px;
   padding: 2em;
   border: 2px solid var(--main-app-color-2) !important;
@@ -62,4 +77,7 @@
   bottom: 0.5em;
   justify-content: flex-end;
   font-style: italic;
+}
+.todoEditBtns{
+    overflow: hidden;
 }

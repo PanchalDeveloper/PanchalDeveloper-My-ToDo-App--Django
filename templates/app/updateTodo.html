@@ -1,9 +1,9 @@
 {% extends 'app/base.html' %} {% block title %}Update - My To Do{% endblock title %}
 {% block mainContent %}
 
-<section id="section_1" aria-labelledby="todo-update-section">
+<section id="section_1" class="container" aria-labelledby="todo-update-section">
   <h1 class="my-4">Update ToDo</h1>
-  <div class="container">
+  <div class="container_fluid">
     <form action="/update-todo/{{todo.id}}" method="POST">
       {% csrf_token %}
       <div class="form-group">

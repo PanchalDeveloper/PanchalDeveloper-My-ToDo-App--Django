@@ -1,0 +1,93 @@
+@media screen and (max-width: 991.9px) {
+
+  
+.alert-dismissable {
+  padding: 1.5rem;
+}
+.alert > .alertCloseBtn {
+  inset: 0 0 auto auto;
+  transform: translate(0%);
+  margin: 0.15rem 0.35rem 0 0;
+}
+  
+  .navbar-toggler {
+    display: inline-block;
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw;
+    padding: 0 !important;
+    background-color: var(--main-app-theme-color);
+  }
+  .flex-SB.flex-wrap {
+    justify-content: space-around !important;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  li.nav-item,
+  ul.navbar-nav {
+    width: 100% !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  ul.navbar-nav{
+    justify-content: center !important;
+  }
+  li.nav-item
+  {
+    max-width: 90% !important;
+  }
+
+  li.nav-item > a {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  li.nav-item > ul.inUl {
+    display: none;
+    position: relative !important;
+  }
+  
+  .q-text-center{
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 578px) {
+  .filterArea,
+  .filterMenuBnt {
+    justify-content: space-around;
+  }
+  .container,
+  .pageSelectionArea {
+    flex-wrap: wrap;
+  }
+  .footerArea{
+    justify-content: center !important;
+  }
+  .footerArea > *{
+    margin-block: 0.25rem;
+  }
+  .todoBody {
+    min-width: 150px;
+    min-height: 150px;
+  }
+  .time-zone-slct{
+    margin-block: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

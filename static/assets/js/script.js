@@ -13,9 +13,16 @@ catch {
 
 let winSizeCheck = window.addEventListener("load", deviceWidthCheck);
 let winResizeCheck = window.addEventListener("resize", deviceWidthCheck);
-let winScrollCheck = window.addEventListener("scroll", () => { checkWinScoll(gotoTopBtn, 630) });
 let closePopUpOnBlur = document.addEventListener("click", popUpBlurCheck);
 
+// GoTo Top Button
+let winScrollCheck = window.addEventListener("scroll", () => { checkWinScoll(gotoTopBtn, 630) });
+let gotoTopHide = gotoTopBtn.addEventListener("click", hideOnClick);
+
+// User Login Time Area
+const usrTimeArea = document.getElementById('footerUserTime');
+
+(usrTimeArea.textContent)?(usrTimeArea.parentElement.style.display = 'flex'):(usrTimeArea.parentElement.style.display = 'none');
 
 // Change Todo Pages
 function loadPageData(toPage = 1, checkLocal = false) {

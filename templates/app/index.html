@@ -2,15 +2,12 @@
 {% block title %}Home - My To Do{% endblock title %}
 {% block mainContent %}
 
-<section id="section_1" aria-labelledby="TodoAdd-section">
+<section id="section_1" class="container" aria-labelledby="TodoAdd-section">
   <h1 class="my-4" title="Todo Adding Section">Add Todo</h1>
-  <div class="container py-4">
+  <div class="container_fluid py-4">
     <form action="/" method="POST">
       {% csrf_token %}
       <div class="form-group">
-        <label class="f-small-1" for="title"
-          ><i class="title required_input"></i>Title</label
-        >
         <input
           type="text"
           class="form-control"
@@ -19,35 +16,33 @@
           placeholder="Enter Title"
           required
         />
+        <label class="f-small-1" for="title"><i class="title required_input"></i>Title</label>
       </div>
       <div class="form-group">
-        <label class="f-small-1" for="desc"
-          ><i class="description"></i>Description</label>
         <textarea
           class="form-control"
           id="desc"
           name="desc"
           placeholder="Enter Description"
-          spellcheck="true"
-          
-        ></textarea>
+          spellcheck="true"></textarea>
+          <label class="f-small-1" for="desc"><i class="description"></i>Description</label>
       </div>
-      <div class="form-group my-3">
+      <div class="form-group btns-area my-3">
         <button type="submit" class="btn m-4">Add</button>
       </div>
     </form>
   </div>
 </section>
 
-<section id="todo-section">
+<section id="todo-section" class="container">
   <h1 class="my-4" title="Added Todos Section">Todo List</h1>
-  <div class="container todoListContainer">
+  <div class="container_fluid todoListContainer">
     {% if todos|length <= 0 %}
     <div class="empty-alert alert-secondary w-100 text-center py-4" role="alert">
       No record found. Add your Todos now !
     </div>
     {% else %}
-    <div class="container filterArea flex flex-SB flex-wrap a-center p-relative">
+    <div class="container_fluid filterArea flex flex-SB flex-wrap a-center p-relative px-2">
       <div class="filterMenu flex flex-wrap j-center w-50">
         <button
           type="button"
@@ -87,25 +82,25 @@
           </button>
           <form method="dialog" class="dialogForm py-3 px-4">
             <h2 class="text-center">Filter Todos</h2>
-            <div class="filterByDate container pop-up-data flex j-center no-wrap flex-column mt-3">
+            <div class="filterByDate container_fluid pop-up-data flex j-center no-wrap flex-column mt-3">
               <h4>Filter by Date</h4>
               <div class="form-group">
-                <label class="f-small-1" for="minDateBox">From</label>
                 <input
                   type="date"
                   name="minDateBox"
                   id="minDateBox"
                   class="sortingByDate p-2"
                 />
+                <label class="f-small-1" for="minDateBox">From</label>
               </div>
               <div class="form-group">
-                <label class="f-small-1" for="maxDateBox">To</label
-                ><input
+                  <input
                   type="date"
                   name="maxDateBox"
                   id="maxDateBox"
                   class="sortingByDate p-2"
                 />
+                <label class="f-small-1" for="maxDateBox">To</label>
               </div>
               <div class="form-group">
                 <span class="btnsContainer flex a-center j-center">
@@ -146,7 +141,7 @@
         />
       </form>
     </div>
-    <div class="container flex flex-SB">
+    <div class="container_fluid flex flex-SB px-2">
       <div class="changePages flex flex-SA flex-wrap">
         <div class="pageSelectTitle flex a-center h4 m-2" title="Go To Page">
           Page :-
@@ -158,7 +153,7 @@
         ></div>
       </div>
     </div>
-    <div id="todoList" class="container todoList p-3">
+    <div id="todoList" class="container_fluid todoList p-3">
       {% for todo in todos %}
       <div id="todo_{{ forloop.counter }}"
       class="todoBody" data-created-date="{{ todo.todoTime|date:"Y-m-d" }}"
@@ -191,7 +186,7 @@
         title="Make Changes in Todos."
       >
       <a
-          href=" {% url 'updateTodo' todo_id=todo.id %}"
+          href="{% url 'updateTodo' todo_id=todo.id %}"
           class="updateTodo todoEditBtn btn btn-outline-dark m-2 p-box boxBig"
           title="Update Todo"
         >
@@ -221,7 +216,7 @@
       </div>
     </div>
   </div>
-  <div class="container flex j-end">
+  <div class="container_fluid flex j-end px-2">
     <div class="changePages flex flex-SA flex-wrap">
       <div class="pageSelectTitle flex a-center h4 m-2" title="Go To Page">
         Page :-

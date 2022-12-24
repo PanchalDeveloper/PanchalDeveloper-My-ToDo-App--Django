@@ -19,8 +19,8 @@ const loadFile = async (url, type, rel, extraAttr) => {
         }
         document.head.append(linkFile);
 
-        linkFile.onload = () => { resolve(`File ('${url}') has been loaded successfully.`) }
-        linkFile.onerror = () => { reject(`File ('${url}') can't be loaded.`) }
+        linkFile.onload = () => { resolve(`file ('${url}') has been loaded successfully.`) }
+        linkFile.onerror = () => { reject(`file ('${url}') can't be loaded.`) }
 
     });
 }

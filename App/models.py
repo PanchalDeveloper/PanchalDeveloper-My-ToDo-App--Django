@@ -14,7 +14,7 @@ class Todo(models.Model):
 class TrashedTodo(models.Model):
     title = models.CharField(max_length=200,default="")
     description = models.TextField(max_length=100000,default="")
-    todoTime = models.DateTimeField(auto_now_add=True)
+    todoTime = models.DateTimeField(auto_now_add=False)
     Auther = models.ForeignKey(User, on_delete=models.CASCADE,default=None,null=True)
     
     def __str__(self):

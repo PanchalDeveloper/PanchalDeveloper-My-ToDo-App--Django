@@ -5,14 +5,15 @@ from datetime import datetime
 from App.models import Todo, TrashedTodo
 from App import auth
 
+
 # Website Home
 def index(request):
     # Set TimeZone
-    if request.method == "POST" and request.POST.get('currTimeZone') and request.POST.get('timeZoneChanged') == 'True':
+    if request.method == "POST" and request.POST.get(
+            'currTimeZone') and request.POST.get('timeZoneChanged') == 'True':
         request.session['django_timezone'] = request.POST['currTimeZone']
         return redirect(index)
-        
-        
+
     # Adding To-do
     if (request.user.is_anonymous):
         return redirect(auth.logIn)
@@ -30,7 +31,11 @@ def index(request):
                 todo.save()
                 messages.success(request, 'Added Todo Successfully !')
                 return redirect(index)
-    return render(request, "app\\index.html", {'timezones': auth.timezones, **context})
+    return render(request, "app/index.html", {
+        'timezones': auth.timezones,
+        **context
+    })
+
 
 # Update Todo
 
@@ -58,7 +63,11 @@ def updateTodo(request, todo_id):
     else:
         messages.error(request, 'No Todo Found.', extra_tags="danger")
         return redirect(index)
-    return render(request, "app\\updateTodo.html", {'timezones': auth.timezones, **context})
+    return render(request, "app/updateTodo.html", {
+        'timezones': auth.timezones,
+        **context
+    })
+
 
 # View Deleted Todos in TrashBin
 
@@ -71,7 +80,11 @@ def trashBin(request):
         todos = TrashedTodo.objects.all().filter(Auther=user)
         context = {"user": user, "todos": todos}
 
-    return render(request, "app\\trashedTodos.html", {'timezones': auth.timezones, **context})
+    return render(request, "app/trashedTodos.html", {
+        'timezones': auth.timezones,
+        **context
+    })
+
 
 # Delete A Single Todo
 
@@ -85,8 +98,7 @@ def deleteTodo(request, todo_id):
     if (todo.Auther == user):
         if (todo is not None):
             if ((user is not None) and (not user.is_anonymous)):
-                deletedTodo = TrashedTodo(
-                    id=todo.id, title=todo.title, description=todo.description, todoTime=todo.todoTime, Auther_id=todo.Auther_id)
+                deletedTodo = TrashedTodo(id=todo.id, title=todo.title, description=todo.description, todoTime=todo.todoTime, Auther_id=todo.Auther_id)
                 deletedTodo.save()
                 todo.delete()
                 messages.success(request, 'Deleted Todo Successfully !')
@@ -94,6 +106,7 @@ def deleteTodo(request, todo_id):
         messages.error(request, 'No Todo Found.', extra_tags="danger")
         return redirect(index)
     return redirect(index)
+
 
 # Restore A Todo
 
@@ -108,8 +121,10 @@ def restoreTodo(request, todo_id):
     if (deletedTodo.Auther == user):
         if (deletedTodo is not None):
             if ((user is not None) and (not user.is_anonymous)):
-                todo = Todo(id=deletedTodo.id, title=deletedTodo.title, description=deletedTodo.description,
-                            todoTime=deletedTodo.todoTime, Auther_id=deletedTodo.Auther_id)
+                todo = Todo(id=deletedTodo.id, title=deletedTodo.title, description=deletedTodo.description, todoTime=deletedTodo.todoTime, Auther_id=deletedTodo.Auther_id)
+                todo.save()
+                todo = Todo.objects.get(id=deletedTodo.id)
+                todo.todoTime = deletedTodo.todoTime
                 todo.save()
                 deletedTodo.delete()
                 messages.success(request, 'Restored Todo Successfully !')
@@ -117,6 +132,7 @@ def restoreTodo(request, todo_id):
         messages.error(request, 'No Todo Found.', extra_tags="danger")
         return redirect(index)
     return redirect(index)
+
 
 # Premanently Delete Todos from TrashBin
 
@@ -131,12 +147,13 @@ def delTrashTodo(request, todo_id):
         if ((user is not None) and (not user.is_anonymous)):
             if (todo.Auther == user):
                 todo.delete()
-                messages.success(
-                    request, 'Successfully Deleted Todo Permanently !')
+                messages.success(request,
+                                 'Successfully Deleted Todo Permanently !')
     else:
         messages.error(request, 'No Todo Found.', extra_tags="danger")
         return redirect(trashBin)
     return redirect(trashBin)
+
 
 # Delete All Trashed Todos At Once
 
@@ -149,8 +166,8 @@ def clearTrashBin(request):
                 todos = TrashedTodo.objects.all().filter(Auther=user)
                 if (todos.first() is not None):
                     todos.delete()
-                    messages.success(
-                        request, 'Cleared Trash Bin Successfully !')
+                    messages.success(request,
+                                     'Cleared Trash Bin Successfully !')
                 else:
                     messages.warning(request, 'Trash Bin is Already Clear.')
             except:

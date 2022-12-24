@@ -37,8 +37,8 @@
     <link rel="stylesheet" href="/static/assets/css/utility.css" />
     <link rel="stylesheet" href="/static/assets/css/sapcingStyle.css" />
     <link rel="stylesheet" href="/static/assets/css/style.css" />
-    <link rel="stylesheet" href="/static/assets/css/mediaAndQuerys.css" />
     <link rel="stylesheet" href="/static/assets/css/todoListStyle.css" />
+    <link rel="stylesheet" href="/static/assets/css/mediaQuerys.css" />
     <script src="/static/assets/js/loadNetworkFiles.js"></script>
     <title> {% block title %}{% endblock title %} </title>
   </head>
@@ -51,9 +51,9 @@
       <div class="container_fluid">
         <nav
           id="navbar"
-          class="navbar navbar-expand-lg px-3 flex flex-SB"
+          class="navbar navbar-expand-lg px-4 py-1 flex flex-SB"
         >
-          <div class="container nav-left flex flex-SB p-center">
+          <div class="nav-left flex flex-SB p-center">
             <a class="navbar-brand flex p-center ml-2" href="/"
             ><img
               src="/static/assets/images/logo_main.png"
@@ -62,7 +62,7 @@
               class="logo-main my-1"
           /></a>
           </div>
-        <div class="container nav-right flex j-end a-center">
+        <div class="container_fluid nav-right flex j-end a-center">
           <button
           id="navbarToggler"
           class="navbar-toggler bg-none"
@@ -76,7 +76,7 @@
         >
         <i id="navMenuBtn" class="lni lni-menu"></i>
         </button>
-          <div id="navbarMenuList" class="collapse navbar-collapse hidden" id="navbarSupportedContent">
+          <div id="navbarMenuList" class="collapse navbar-collapse w-100 hidden" id="navbarSupportedContent">
             <ul class="navbar-nav nav-list flex flex-SB">
               <li class="nav-item flex j-center my-0">
                 <ul
@@ -84,7 +84,7 @@
                   title="Main Navigation Bar."
                 >
                   <li class="nav-item flex j-center" title="Go to Home Page.">
-                    <a class="nav-link btn f-big-2 f-small-1" aria-current="page" href="/"
+                    <a class="nav-link btn f-small-0" aria-current="page" href="/"
                       >Home</a
                     >
                   </li>
@@ -98,7 +98,7 @@
                   {% if user.is_anonymous %}
                   <li class="nav-item flex j-center">
                     <a
-                      class="nav-link btn f-big-2 f-small-1"
+                      class="nav-link btn f-small-0"
                       aria-current="page"
                       href="/login"
                       >Log In</a
@@ -109,7 +109,7 @@
                     title="Go to Sigh-up Page."
                   >
                     <a
-                      class="nav-link btn f-big-2 f-small-1"
+                      class="nav-link btn f-small-0"
                       aria-current="page"
                       href="/signup"
                       >Sign Up</a
@@ -119,11 +119,11 @@
                   {% else %}
                   <li
                     id="userArea"
-                    class="nav-item flex j-center usr p-relative"
+                    class="nav-item inUl-prnt flex j-center usr p-relative"
                     title="User Area"
                   >
                     <a
-                      class="nav-link btn f-big-2 usr-link r-alert f-small-1"
+                      class="nav-link btn f-small-0 usr-link r-alert"
                       aria-current="page"
                       href="#user-area"
                       title="Greatings to User."
@@ -137,7 +137,7 @@
                         class="nav-item flex j-center"
                         title="Go To Change Password Page."
                       >
-                        <a href="/#todo-section" class="nav-link btn f-big-2"
+                        <a href="/#todo-section" class="nav-link btn f-small-0"
                           >My To-Dos</a
                         >
                       </li>
@@ -146,7 +146,7 @@
                         class="nav-item flex j-center"
                         title="Go To Admin Page."
                       >
-                        <a href="/ap/admin" class="nav-link btn f-big-2"
+                        <a href="/ap/admin" class="nav-link btn f-small-0"
                           >Admin Page</a
                         >
                       </li>
@@ -155,7 +155,7 @@
                         class="nav-item flex j-center"
                         title="Go To Change Password Page."
                       >
-                        <a href="/change-password" class="nav-link btn f-big-2"
+                        <a href="/change-password" class="nav-link btn f-small-0"
                           >Change Password</a
                         >
                       </li>
@@ -166,7 +166,7 @@
                         <a
                         id="delAccount"
                         href="#delete-my-account"
-                        class="nav-link confirmation btn show-pop-up-btn f-big-2 r-alert"
+                        class="nav-link btn f-small-0 confirmation show-pop-up-btn r-alert"
                         onclick="event.preventDefault(), showConfirmDialog(action='/delete-account', 'This will Delete Your Account & all it\'s data Permanently', 'Delete it Anyway !?', 'true', 'Delete')"
                         >Delete My Account</a>
                       </li>
@@ -174,17 +174,17 @@
                   
                     <li
                     id="trashBinArea"
-                    class="nav-item flex j-center"
+                    class="nav-item inUl-prnt flex j-center"
                     title="Trash Bin Area."
                   >
-                    <a href="#trash-bin-area" class="nav-link btn f-big-2">Trash Bin</a>
+                    <a href="#trash-bin-area" class="nav-link btn f-small-0">Trash Bin</a>
                     <ul class="inUl navbar-nav">
                       <span class="tri-angle no-usr-select"></span>
                       <li
                     class="nav-item flex j-center"
                     title="Go To Trash Bin Page."
                   >
-                    <a href="/trash-bin" class="nav-link btn f-big-2">GoTo Trash Bin</a>
+                    <a href="/trash-bin" class="nav-link btn f-small-0">GoTo Trash Bin</a>
                     </li>
                       <li
                     class="nav-item flex j-center"
@@ -193,7 +193,7 @@
                     <a
                       id="clrTrashBin"
                       href="#clearTrashBin"
-                      class="nav-link confirmation btn show-pop-up-btn f-big-2 r-alert"
+                      class="nav-link btn f-small-0 confirmation show-pop-up-btn r-alert"
                       onclick="event.preventDefault(), showConfirmDialog(action='/clear-trash-bin', 'This will clear Trash Bin Permanently', 'Wanna proceed anyway !?')"
                       >Clear Trash Bin</a>
                   </li>
@@ -202,7 +202,7 @@
                   </li>
                   <li class="nav-item flex j-center" title="Log-Out Now">
                     <a
-                      class="nav-link btn f-big-2 f-small-1"
+                      class="nav-link btn f-small-0"
                       aria-current="page"
                       href="/logout"
                       >Log-Out</a
@@ -220,7 +220,7 @@
     <main class="mt-2">
       {% if messages %} {% for message in messages %}
       <div
-        class="alert alert-{{ message.tags }} alert-dismissable pop-up fade show ab-in-cent text-center py-2"
+        class="alert alert-{{ message.tags }} alert-dismissable pop-up fade show ab-in-cent text-center"
       >
         {{ message }}
         <button
@@ -231,8 +231,7 @@
         ><i class="lni lni-close"></i></button>
       </div>
       {% endfor %} {% endif %} {% block mainContent %} {% endblock mainContent %}
-    </main>
-    <div
+        <div
       class="gotoTop flex a-center j-end w-100 p-4"
       id="gotoTop"
       onclick="winScroll()"
@@ -243,32 +242,28 @@
         class="gotoTopBtn lni lni-chevron-up p-box boxBig"
       ></span>
     </div>
+    </main>
     <footer
-      class="footer flex flex-SB flex-wrap flex-even-1 p-3"
+      class="footer flex flex-SB flex-wrap p-4"
       id="appFooter"
     >
-    <div class="container">
-      <div class="footerUsrArea flex flex-wrap flex-even-0">
+    <div class="container_fluid">
+      <div class="footerUsrArea footerArea flex flex-SB flex-wrap">
         <div class="footerLeft flex a-center lh-small">
-          <div class="footerSocial no-wrap" id="footerSocial">
-            <a href="http://www.facebook.com/PanchalDevloper" target="_blank" class=" m-2 p-2"><span class="lni lni-facebook-filled"></span></a>
-            <a href="http://twitter.com/PanchalDevloper" target="_blank" class=" m-2 p-2"><span class="lni lni-twitter-original"></span></a>
-            <a href="https://www.linkedin.com/in/panchal-devloper/" target="_blank" class=" m-2 p-2"><span class="lni lni-linkedin-original"></span></a>
-            <a href="https://github.com/PanchalDeveloper" target="_blank" class=" m-2 p-2"><span class="lni lni-github-original"></span></a>
-            <a href="https://stackoverflow.com/u/20530552" target="_blank" class=" m-2 p-2"><span class="lni lni-stackoverflow"></span></a>
+          <div class="footerSocial flex-wrap" id="footerSocial">
+            <a href="http://www.facebook.com/PanchalDevloper" target="_blank" class="p-3"><span class="lni lni-facebook-filled"></span></a>
+            <a href="http://twitter.com/PanchalDevloper" target="_blank" class="p-3"><span class="lni lni-twitter-original"></span></a>
+            <a href="https://www.linkedin.com/in/panchal-devloper/" target="_blank" class="p-3"><span class="lni lni-linkedin-original"></span></a>
+            <a href="https://github.com/PanchalDeveloper" target="_blank" class="p-3"><span class="lni lni-github-original"></span></a>
+            <a href="https://stackoverflow.com/u/20530552" target="_blank" class="p-3"><span class="lni lni-stackoverflow"></span></a>
           </div>
         </div>
-        <div class="footerRight flex a-center lh-small text-right f-italic">
-          <div class="userTime f-small-3 w-100" id="footerUserTime">{% if not user.is_anonymous %}Last Login :-{{ user.last_login }}{% endif %}
-          </div>
-        </div>
-      </div>
-      <div class="TimeZoneArea flex a-center j-end no-wrap lh-small">
+        <div class="footerRight flex a-center lh-small">
         <form action="/" id="timeZoneForm" method="POST">
           {% csrf_token %}
-          <div class="form-group flex-row">
+          <div class="time-zone-slct form-group my-2 flex-row">
             <label for="currTimeZone" class="bg-none">Location :</label>
-            <select name="currTimeZone" id="currTimeZone">
+            <select name="currTimeZone" id="currTimeZone" class="slct-optn">
               {% if timezones %}
               {% for city, tz in timezones.items %}
               <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ city }}</option>
@@ -281,7 +276,10 @@
           </div>
       </form>
       </div>
-      <div class="copyrightArea flex j-center w-100 f-italic" id="footerCopyright">
+      </div>
+      <div class="userTimeArea footerArea flex a-center j-end no-wrap lh-small">
+        <i class="userTime text-right q-text-center f-small-3 w-100" id="footerUserTime">{% if not user.is_anonymous %}Last Login :- {{ user.last_login }}{% endif %}</i></div>
+      <div class="copyrightArea footerArea flex j-center text-center w-100 f-italic" id="footerCopyright">
           &copy 2022 Copyright: Panchal Devloper | All Rights Reserved
       </div>
     </div>
@@ -293,13 +291,12 @@
       >
         <i class="fa-solid fa-circle-xmark"></i>
       </button>
-      <form action="/" method="POST" id="confirmationPopUpForm" class="dialogForm py-3 px-4">
+      <form action="/" method="POST" id="confirmationPopUpForm" class="dialogForm py-3 px-4" aria-hidden='true'>
         {% csrf_token %}
         <div class="pop-up-data flex j-center no-wrap flex-column mt-3">
         <h5 id="popUpHeadMsgTxt" class="text-center mt-2"></h5>
         <p id="popUpBodyMsgTxt" class="text-center mt-2 f-big-1"></p>
         <div id="popUpConfirmPassArea" class="form-group">
-          <label for="popUpConfirmPass"><i class="required_input"></i>Verify Yourself</label>
           <input
             type="password" autocomplete="current-password"
             class="form-control"
@@ -307,10 +304,11 @@
             name="popUpConfirmPass"
             placeholder="Enter Password"
           />
+          <label for="popUpConfirmPass"><i class="required_input"></i>Verify Yourself</label>
         </div>
         <div class="form-group flex-row">
           <button type="submit" id="popUpMsgProceedBtn" class="btn m-3">Proceed</button>
-          <button type="button" id="popUpMsgCancelBtn" class="btn hide-pop-up-btn m-3">Cancel</button>
+          <button type="button" id="popUpMsgCancelBtn" class="btn hide-pop-up-btn m-1">Cancel</button>
         </div>
         </div>
       </form>

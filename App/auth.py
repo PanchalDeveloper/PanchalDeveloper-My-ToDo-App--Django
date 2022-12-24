@@ -31,19 +31,22 @@ def logIn(request):
             user = User.objects.filter(username=userId).first()
 
             if (user is not None):
-                if (check_password(password, user.password) and authenticate(username=userId, password=password)):
+                if (check_password(password, user.password)
+                        and authenticate(username=userId, password=password)):
                     login(request, user=user)
                     messages.success(request, 'Logged-in Successfully !')
                     return redirect(views.index)
                 else:
-                    messages.error(request, 'Incorrect Password',
+                    messages.error(request,
+                                   'Incorrect Password',
                                    extra_tags='danger')
             else:
-                messages.error(request, 'User doesn\'t exist',
+                messages.error(request,
+                               'User doesn\'t exist',
                                extra_tags='danger')
     else:
         return redirect(views.index)
-    return render(request, 'app\\login.html', {'timezones': timezones})
+    return render(request, 'app/login.html', {'timezones': timezones})
 
 
 def signUp(request):
@@ -58,24 +61,31 @@ def signUp(request):
         user = User.objects.filter(username=userId).first()
 
         if (user is not None):
-            messages.error(
-                request, 'This E-Mail ID already exist in our Database.', extra_tags='danger')
+            messages.error(request,
+                           'This E-Mail ID already exist in our Database.',
+                           extra_tags='danger')
         else:
             if (len(firstName) < 2):
-                messages.error(
-                    request, 'First Name is too short.', extra_tags='danger')
+                messages.error(request,
+                               'First Name is too short.',
+                               extra_tags='danger')
             elif (lastName == firstName):
-                messages.error(
-                    request, 'Last Name can\'t be same as The First Name.', extra_tags='danger')
+                messages.error(request,
+                               'Last Name can\'t be same as The First Name.',
+                               extra_tags='danger')
             elif (len(password) < 8):
                 messages.error(
-                    request, 'Password should be at least 8 characters long.', extra_tags='danger')
+                    request,
+                    'Password should be at least 8 characters long.',
+                    extra_tags='danger')
             elif (password != confPassword):
-                messages.error(
-                    request, 'Both The Passwords must be same.', extra_tags='danger')
+                messages.error(request,
+                               'Both The Passwords must be same.',
+                               extra_tags='danger')
             else:
-                user = User.objects.create_user(
-                    username=userId, email=email, password=password)
+                user = User.objects.create_user(username=userId,
+                                                email=email,
+                                                password=password)
                 user.first_name = firstName
                 user.last_name = lastName
                 user.save()
@@ -83,7 +93,7 @@ def signUp(request):
                 messages.success(
                     request, 'Your Account has been created Successfully !')
                 return redirect(logIn)
-    return render(request, 'app\\signup.html', {'timezones': timezones})
+    return render(request, 'app/signup.html', {'timezones': timezones})
 
 
 def changePassword(request):
@@ -96,25 +106,33 @@ def changePassword(request):
         if (user is not None):
             if (not (newPassword == oldPassword)):
                 if (len(newPassword) >= 8):
-                    if (check_password(oldPassword, user.password) and authenticate(username=userId, password=oldPassword)):
+                    if (check_password(oldPassword, user.password)
+                            and authenticate(username=userId,
+                                             password=oldPassword)):
                         user.set_password(newPassword)
                         user.save()
-                        messages.success(
-                            request, 'Password Changed Successfully !')
+                        messages.success(request,
+                                         'Password Changed Successfully !')
                         login(request, user=user)
                         return redirect(views.index)
                     else:
-                        messages.error(
-                            request, 'Incorrect Old Password.', extra_tags='danger')
+                        messages.error(request,
+                                       'Incorrect Old Password.',
+                                       extra_tags='danger')
                 else:
                     messages.error(
-                        request, 'New Password should be at least 8 characters long.', extra_tags='danger')
+                        request,
+                        'New Password should be at least 8 characters long.',
+                        extra_tags='danger')
             else:
-                messages.error(
-                    request, 'New and Old Passwords should\'t be the same.', extra_tags='danger')
+                messages.error(request,
+                               'New and Old Passwords should\'t be the same.',
+                               extra_tags='danger')
         else:
             messages.error(request, 'User doesn\'t exist', extra_tags='danger')
-    return render(request, 'app\\changePassword.html', {'timezones': timezones})
+    return render(request, 'app/changePassword.html',
+                  {'timezones': timezones})
+
 
 def delMyAc(request):
     if request.method == "POST":
@@ -122,17 +140,19 @@ def delMyAc(request):
         user = User.objects.get(id=userId)
         password = request.POST.get("popUpConfirmPass")
 
-        print('user ',user," password ", password)
+        print('user ', user, " password ", password)
         if ((user is not None) and (not user.is_anonymous)):
-            if (check_password(password, user.password) and authenticate(username=user.username, password=password)):
+            if (check_password(password, user.password) and authenticate(
+                    username=user.username, password=password)):
                 user.delete()
                 logout(request)
                 messages.success(
                     request, 'Your Account has been Deleted Successfully!')
                 return redirect(views.index)
             else:
-                messages.error(
-                    request, 'Incorrect Password.', extra_tags='danger')
+                messages.error(request,
+                               'Incorrect Password.',
+                               extra_tags='danger')
         else:
             messages.error(request, 'User doesn\'t exist', extra_tags='danger')
     return redirect(logIn)
